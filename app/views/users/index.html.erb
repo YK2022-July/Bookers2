@@ -1,0 +1,20 @@
+<h2>User info</h2>
+
+<span>name</span>
+<span>test</span>
+<p>introduction</p>
+
+<div><%#= link_to "※ココに編集アイコン",  edit_user_path %></div>
+
+
+<h2>New book</h2>
+  <%= form_with model: @book do |f| %>
+    <h4>Title</h4>
+      <%= f.text_field :title %>
+    <h4>Opinion</h4>
+      <%= f.text_area :body %>
+    <%= f.submit 'Create Book' %>
+  <% end %>
+
+
+  <p>※右側の「Users」に一覧を出す</p>
