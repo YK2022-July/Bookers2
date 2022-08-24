@@ -1,10 +1,25 @@
 <h2>User info</h2>
 
-<span>name</span>
-<span>test</span>
-<p>introduction</p>
+<% if @user.profile_image.attached? %>
+  <%= image_tag @user.profile_image, size: "100x100" %>
+<% else %>
+  <%= image_tag 'default-image.jpg', size: "100x100" %>
+<% end %>
 
-<div><%#= link_to "※ココに編集アイコン",  edit_user_path %></div>
+<p><%#= image_tag @user.get_profile_image(100,100) %></p>
+
+</br>
+
+<div>
+<span>name</span>
+<span><%= @user.name %></span>
+</div>
+<div>
+<span>introduction</span>
+<span><%= @user.introduction %></span>
+</div>
+
+<div><%= link_to "ユーザ情報編集（仮）", edit_user_path(@user.id) %></div>
 
 
 <h2>New book</h2>
@@ -17,4 +32,18 @@
   <% end %>
 
 
-  <p>※右側の「Users」に一覧を出す</p>
+<h2>Users</h2>
+
+<div>
+<span>image</span>
+<span>name</span>
+<span></span>
+</div>
+
+<% @users.each do |user| %>
+<div>
+  <span><%= image_tag @user.profile_image, size: "80x80" %></span>
+  <span><%= user.name %></span>
+  <span><%= link_to "Show", user_path(@user.id) %></span>
+</div>
+<% end %>

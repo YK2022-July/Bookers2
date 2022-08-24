@@ -1,2 +1,49 @@
-<h1>Books#index</h1>
-<p>Find me in app/views/books/index.html.erb</p>
+<h2>User info</h2>
+
+<% if @user.profile_image.attached? %>
+  <%= image_tag @user.profile_image, size: "100x100" %>
+<% else %>
+  <%= image_tag 'default-image.jpg', size: "100x100" %>
+<% end %>
+
+<p><%#= image_tag @user.get_profile_image(100,100) %></p>
+
+</br>
+
+<div>
+<span>name</span>
+<span><%= @user.name %></span>
+</div>
+<div>
+<span>introduction</span>
+<span><%= @user.introduction %></span>
+</div>
+
+<div><%= link_to "ユーザ情報編集（仮）", edit_user_path(@user.id) %></div>
+
+
+<h2>New book</h2>
+  <%= form_with model: @book do |f| %>
+    <h4>Title</h4>
+      <%= f.text_field :title %>
+    <h4>Opinion</h4>
+      <%= f.text_area :body %>
+    <%= f.submit 'Create Book' %>
+  <% end %>
+
+
+<h2>Books</h2>
+
+<div>
+<span>Title</span>
+<span>Opinion</span>
+<span></span>
+</div>
+
+<% @books.each do |book| %>
+<div>
+  <span><%= image_tag @user.profile_image, size: "80x80" %></span>
+  <span><%= link_to book.title, book_path(book.id) %></span>
+  <span><%= book.body %></span>
+</div>
+<% end %>
