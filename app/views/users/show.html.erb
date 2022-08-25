@@ -27,15 +27,26 @@
 
 <h2>Books</h2>
 
-<% if user_signed_in? && @user.id == current_user.id %>
-  <% @books.each do |book|%>
+<% if user_signed_in? %>
+  <% if @user.id == current_user.id %>
+    <% @books_current.each do |book|%>
 
-    <div>
-      <%= image_tag current_user.get_profile_image(80,80) %>
+      <div>
+        <%= image_tag current_user.get_profile_image(80,80) %>
 
-      <span><%= link_to book.title, book_path(book.id) %></span>
-      <span><%= book.body %></span>
-    </div>
+        <span><%= link_to book.title, book_path(book.id) %></span>
+        <span><%= book.body %></span>
+      </div>
+    <% end %>
+  <% else %>
+    <% @books_other.each do |book|%>
 
+      <div>
+        <%#= image_tag .get_profile_image(80,80) %>
+
+        <span><%= link_to book.title, book_path(book.id) %></span>
+        <span><%= book.body %></span>
+      </div>
+    <% end %>
   <% end %>
 <% end %>
