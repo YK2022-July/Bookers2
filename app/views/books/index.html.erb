@@ -37,7 +37,7 @@
 
 <% @books.each do |book| %>
 <div>
-  <span><%= image_tag current_user.profile_image, size: "80x80" %></span>
+  <span><%= image_tag book.user.profile_image, size: "80x80" %></span>
   <span><%= link_to book.title, book_path(book.id) %></span>
   <span><%= book.body %></span>
 </div>
