@@ -15,12 +15,16 @@
 
 <h2>Book detail</h2>
 
-<% if @book.user_id == @user.id %>
+<% if user_signed_in? && @book.user_id == current_user.id %>
 <%#= image_tag user.profile_image, size: "100x100" %>
-<%= image_tag 'default-image.jpg', size: "80x80" %>
+<%= image_tag current_user.profile_image, size: "80x80" %>
 
 
 <span><%= link_to @book.title, book_path %></span>
 <span><%= @book.body %></span>
+<% if @book.user == current_user %>
+<span><%= link_to "Edit", edit_book_path %></span>
+<span><%= link_to "Destroy", book_path(@book), method: :delete, "data-confirm" => "本当に消しますか？" %></span>
+<% end %>
 
 <% end %>

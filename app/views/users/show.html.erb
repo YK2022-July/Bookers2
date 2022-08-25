@@ -1,22 +1,17 @@
 <h2>User info</h2>
 
-<% if @user.profile_image.attached? %>
-  <%= image_tag @user.profile_image, size: "100x100" %>
-<% else %>
-  <%= image_tag 'default-image.jpg', size: "100x100" %>
-<% end %>
 
-<p><%#= image_tag @user.get_profile_image(100,100) %></p>
+<p><%= image_tag current_user.get_profile_image(100,100) %></p>
 
 </br>
 
 <div>
 <span>name</span>
-<span><%= @user.name %></span>
+<span><%= current_user.name %></span>
 </div>
 <div>
 <span>introduction</span>
-<span><%= @user.introduction %></span>
+<span><%= current_user.introduction %></span>
 </div>
 
 <div><%= link_to "ユーザ情報編集（仮）", edit_user_path %></div>
@@ -32,13 +27,13 @@
 
 <h2>Books</h2>
 
-<% if @book.user_id == @user.id %>
-  <% @user.books.each do |book|%>
+<% if user_signed_in? && @user.id == current_user.id %>
+  <% @books.each do |book|%>
 
     <div>
-      <%= image_tag 'default-image.jpg', size: "80x80" %>
+      <%= image_tag current_user.get_profile_image(80,80) %>
 
-      <span><%= link_to book.title, book_path %></span>
+      <span><%= link_to book.title, book_path(book.id) %></span>
       <span><%= book.body %></span>
     </div>
 
