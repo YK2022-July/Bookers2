@@ -1,33 +1,16 @@
-<h2>User info</h2>
+<%= render 'users/user', book: @book %>
 
-<span>name</span>
-<span>test</span>
-<p>introduction</p>
-
-<h2>New book</h2>
-  <%= form_with model: @book do |f| %>
-    <h4>Title</h4>
-      <%= f.text_field :title %>
-    <h4>Opinion</h4>
-      <%= f.text_area :body %>
-    <%= f.submit 'Create Book' %>
-  <% end %>
-
-<h2>Book detail</h2>
 
 <% if user_signed_in? %>
   <% if @book.user_id == current_user.id %>
-<%#= image_tag user.profile_image, size: "100x100" %>
-    <%= link_to image_tag(current_user.profile_image, size: "80x80"), user_path %>
-
-
+    <%= link_to image_tag(current_user.profile_image, size: "80x80"), user_path(current_user.id) %>
+    <%= link_to User.name, user_path(current_user) %>
     <span><%= link_to @book.title, book_path %></span>
     <span><%= @book.body %></span>
-  <%# if @book.user == current_user %>
-    <span><%= link_to "Edit", edit_book_path %></span>
-    <span><%= link_to "Destroy", book_path(@book), method: :delete, "data-confirm" => "本当に消しますか？" %></span>
+    <span><%= link_to "Edit", edit_book_path, class:"btn btn-success" %></span>
+    <span><%= link_to "Destroy", book_path(@book), class:"btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？" %></span>
   <% else %>
-
+    <%#= link_to image_tag(XXXXX.profile_image, size: "80x80"), user_path(XXXXX) %>
     <span><%= link_to @book.title, book_path %></span>
     <span><%= @book.body %></span>
   <% end %>

@@ -1,44 +1,20 @@
-<h2>User info</h2>
-
-
-<p><%= image_tag current_user.get_profile_image(100,100) %></p>
-
-</br>
-
-<div>
-<span>name</span>
-<span><%= current_user.name %></span>
-</div>
-<div>
-<span>introduction</span>
-<span><%= current_user.introduction %></span>
-</div>
-
-<div><%= link_to "ユーザ情報編集（仮）", edit_user_path %></div>
-
-<h2>New book</h2>
-  <%= form_with model: @book do |f| %>
-    <h4>Title</h4>
-      <%= f.text_field :title %>
-    <h4>Opinion</h4>
-      <%= f.text_area :body %></br>
-    <%= f.submit 'Create Book' %>
-  <% end %>
+<%= render 'user', book: @book %>
 
 <h2>Books</h2>
 
-<% if user_signed_in? %>
-  <% if @user.id == current_user.id %>
+<% if user_signed_in? && @user.id == current_user.id %>
     <% @books_current.each do |book|%>
 
       <div>
-        <%= image_tag current_user.get_profile_image(80,80) %>
+        <%= link_to image_tag current_user.get_profile_image(80,80) %>
 
         <span><%= link_to book.title, book_path(book.id) %></span>
         <span><%= book.body %></span>
       </div>
     <% end %>
-  <% else %>
+<% else %>
+  <%# if @user.id == @Books %>
+
     <% @books_other.each do |book|%>
 
       <div>
@@ -48,5 +24,5 @@
         <span><%= book.body %></span>
       </div>
     <% end %>
-  <% end %>
+  <%# end %>
 <% end %>
