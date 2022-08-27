@@ -1,3 +1,6 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 mx-auto">
 <h1>
   welcome to
   <i class="fa-solid fa-book"></i>
@@ -17,14 +20,15 @@
 <p>you can share and exchange your opinions, inpressions, and emotions</p>
 <p>about various books!</p>
 
-<div>
-  <div>
-    <%= link_to "Log in", user_session_path, class:"btn btn-info" %>
+<div class="col-10 mx-auto btn-wrapper">
+  <div class="row mb-3">
+    <%= link_to "Log in", user_session_path, class:"btn btn-info btn-sm btn-block" %>
   </div>
-</div>
-<div>
-  <div>
-    <%= link_to "Sign up", user_registration_path, class:"btn btn-success" %>
+  <div class="row">
+    <%= link_to "Sign up", new_user_registration_path, class:"btn btn-success btn-sm btn-block" %>
   </div>
 </div>
 
+    </div>
+  </div>
+</div>

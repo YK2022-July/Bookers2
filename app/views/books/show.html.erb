@@ -1,18 +1,34 @@
-<%= render 'users/user', book: @book %>
+<div class="container">
+  <div class="row d-flex">
+    <div class="col">
+      <%= render 'users/user', book: @book %>
+    </div>
 
-
-<% if user_signed_in? %>
-  <% if @book.user_id == current_user.id %>
-    <%= link_to image_tag(current_user.profile_image, size: "80x80"), user_path(current_user.id) %>
-    <%= link_to User.name, user_path(current_user) %>
-    <span><%= link_to @book.title, book_path %></span>
-    <span><%= @book.body %></span>
-    <span><%= link_to "Edit", edit_book_path, class:"btn btn-success" %></span>
-    <span><%= link_to "Destroy", book_path(@book), class:"btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？" %></span>
-  <% else %>
-    <%#= link_to image_tag(XXXXX.profile_image, size: "80x80"), user_path(XXXXX) %>
-    <span><%= link_to @book.title, book_path %></span>
-    <span><%= @book.body %></span>
-  <% end %>
-
-<% end %>
+    <div class="col ml-5">
+      <h2>Book detail</h2>
+      <table class="table">
+        <body>
+          <tr>
+            <% if user_signed_in? %>
+              <% if @book.user_id == current_user.id %>
+                <td>
+                  <%= link_to image_tag(current_user.profile_image, size: "80x80"), user_path(current_user.id) %>
+                  <br>
+                  <%= link_to User.name, user_path(current_user) %>
+                </td>
+                <td><%= link_to @book.title, book_path %></td>
+                <td><%= @book.body %></td>
+                <td><%= link_to "Edit", edit_book_path, class:"btn btn-success" %></td>
+                <td><%= link_to "Destroy", book_path(@book), class:"btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？" %></td>
+              <% else %>
+                <td><%#= link_to image_tag(XXXXX.profile_image, size: "80x80"), user_path(XXXXX) %></td>
+                <td><%= link_to @book.title, book_path %></td>
+                <td><%= @book.body %></td>
+              <% end %>
+            <% end %>
+          </tr>
+        </body>
+      </table>
+    </div>
+  </div>
+</div>

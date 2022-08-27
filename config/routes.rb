@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :edit, :update]
   resources :books, only: [:new, :create, :index, :show, :edit, :update, :destroy]
 
-  #post "users/:id" => "books#create"
+  post "users/:id" => "books#create"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
