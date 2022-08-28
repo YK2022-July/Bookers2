@@ -3,10 +3,8 @@
     <div class="col">
       <%= render 'user', book: @book %>
     </div>
-
     <div class="col ml-5">
       <h2>Books</h2>
-
         <table class="table table-hover table-inverse">
           <thead>
             <tr>
@@ -17,7 +15,7 @@
             </tr>
           </thead>
           <tbody>
-            <% if user_signed_in? && @user.id == current_user.id %>
+            <% if @user.id == current_user.id %>
               <% @books_current.each do |book|%>
                 <tr>
                   <td><%= link_to image_tag current_user.get_profile_image(80,80) %></td>
@@ -26,29 +24,16 @@
               <% end %>
                 </tr>
             <% else %>
-
-
-
-
-  <%# if @user.id == @Books %>
-
               <% @books_other.each do |book|%>
-
                 <tr>
-                 <td><%#= image_tag .get_profile_image(80,80) %></td>
-
+                 <td><%= link_to image_tag book.user.profile_image, size: "80x80" %></td>
                  <td><%= link_to book.title, book_path(book.id) %></td>
                  <td><%= book.body %></td>
                </tr>
               <% end %>
-  <%# end %>
             <% end %>
-
-
-
         </tbody>
       </table>
-
     </div>
   </div>
 </div>

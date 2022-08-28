@@ -8,13 +8,16 @@ class UsersController < ApplicationController
 
   def show
     @books_current = Book.where(user_id: current_user.id)
-    @books_other = Book.all.where(user_id: User)
     @user = User.find(params[:id])
+    @books_other = Book.where(user_id: @user)
     @book = Book.new
   end
 
   def edit
     @user = User.find(params[:id])
+    unless user_signed_in? && (current_user == @user)
+      redirect_to root_path
+    end
   end
 
   def update
