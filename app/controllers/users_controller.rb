@@ -1,22 +1,21 @@
 class UsersController < ApplicationController
 
   def index
-    #@user = User.find(params[:id])
+    @user = current_user
     @users = User.all
     @book = Book.new
   end
 
   def show
-    @books_current = Book.where(user_id: current_user.id)
-    @user = User.find(params[:id])
-    @books_other = Book.where(user_id: @user)
     @book = Book.new
+    @user = User.find(params[:id])
+    @books = @user.books
   end
 
   def edit
     @user = User.find(params[:id])
     unless user_signed_in? && (current_user == @user)
-      redirect_to user_path
+      redirect_to user_path(current_user.id)
     end
   end
 
